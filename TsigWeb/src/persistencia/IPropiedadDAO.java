@@ -1,11 +1,11 @@
 package persistencia;
 
 import javax.ejb.Local;
-import dominio.Propiedad;
+import dominio.Casa;
 
 @Local
 public interface IPropiedadDAO {
 	
-	public boolean guardarPropiedad(Propiedad propiedad);
+	public boolean guardarPropiedad(Casa Casa);
 
 }

@@ -10,13 +10,13 @@ import javax.persistence.Table;
 
 @Table(name = "propiedad")
 @Entity
-public class Propiedad implements Serializable{
+public class Casa implements Serializable{
 
 	private static final long serialVersionUID = 1L; // Mapping JPA
 	
 	@Id
-	@Column(name = "idprop", nullable = false)
-	private int idProp;
+	@Column(name = "idcasa", nullable = false)
+	private int idCasa;
 	
 	@Column(name = "direccion", nullable = false)
 	private String direccion;
@@ -40,13 +40,13 @@ public class Propiedad implements Serializable{
 	private boolean piscina;
 	
 	
-	public Propiedad(){
+	public Casa(){
 		
 	}
 	
-	public Propiedad(int idProp, String direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage){
+	public Casa(int idCasa, String direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage){
 			
-			this.idProp = idProp;
+			this.idCasa = idCasa;
 			this.direccion = direccion;
 			this.barrio = barrio;
 			this.tipoProp = tipoProp;
@@ -57,9 +57,9 @@ public class Propiedad implements Serializable{
 				
 	}
 	
-	public Propiedad(Propiedad p){
+	public Casa(Casa p){
 		
-			this.idProp = p.getIdProp();
+			this.idCasa = p.getIdCasa();
 		    this.direccion = p.getDireccion();
 		    this.barrio = p.getBarrio();
 		    this.tipoProp = p.getTipoProp();
@@ -70,15 +70,15 @@ public class Propiedad implements Serializable{
 		
 	}
 	
-	public int getIdProp(){
+	public int getIdCasa(){
 		
-			return idProp;
+			return idCasa;
 		
 	}
 	
-	public void setIdProp(int idProp){
+	public void setIdCasa(int idCasa){
 		
-			this.idProp = idProp;
+			this.idCasa = idCasa;
 		
 	}
 	

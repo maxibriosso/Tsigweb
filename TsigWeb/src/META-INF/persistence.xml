@@ -3,7 +3,7 @@
 	<persistence-unit name="TsigWeb" transaction-type="JTA">
 	<jta-data-source>java:jboss/mapas</jta-data-source>
 		<class>dominio.Usuario</class>
-		<class>dominio.Propiedad</class>
+		<class>dominio.Casa</class>
 		</persistence-unit>
 	
 </persistence>

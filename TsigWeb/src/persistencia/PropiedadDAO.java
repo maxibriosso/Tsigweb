@@ -2,7 +2,7 @@ package persistencia;
 
 
 import javax.ejb.Stateless;
-import dominio.Propiedad;
+import dominio.Casa;
 
 @Stateless
 public class PropiedadDAO implements IPropiedadDAO {
@@ -10,11 +10,11 @@ public class PropiedadDAO implements IPropiedadDAO {
 	@javax.persistence.PersistenceContext(unitName = "TsigWeb")
 	private javax.persistence.EntityManager em;
 	
-	public boolean guardarPropiedad(Propiedad prop) {
+	public boolean guardarPropiedad(Casa Casa) {
 		
 		try {
 			
-			em.persist(prop);
+			em.persist(Casa);
 			return true;
 
 		} catch (Exception e) {

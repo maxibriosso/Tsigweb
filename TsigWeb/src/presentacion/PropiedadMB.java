@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 
 import persistencia.PropiedadDAO;
 
-import dominio.Propiedad;;
+import dominio.Casa;
 
 
 @ManagedBean
@@ -19,7 +19,7 @@ public class PropiedadMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	private int idProp;	
+	private int idCasa;	
 	private String direccion;	
 	private String barrio;	
 	private String tipoProp;	
@@ -29,27 +29,27 @@ public class PropiedadMB implements Serializable {
 	private boolean piscina;
 	  
 	private PropiedadDAO propiedad;	
-	private Propiedad p;
+	private Casa c;
 	
 	
 	public String guardarPropiedad(){
 		 
-			propiedad.guardarPropiedad(p);
+			propiedad.guardarPropiedad(c);
 		  
 			return null;
 			
 		}
 	
 	
-	public int getIdProp(){
+	public int getIdCasa(){
 		
-		return idProp;
+		return idCasa;
 	
 	}
 
-	public void setIdProp(int idProp){
+	public void setIdCasa(int idCasa){
 	
-		this.idProp = idProp;
+		this.idCasa = idCasa;
 	
 	}
 
