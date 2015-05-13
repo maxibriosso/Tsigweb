@@ -1,0 +1,32 @@
+#nav{
+	
+	margin-bottom: 0px;
+}
+.fondo {
+
+	/*background: url("#{resource['images:1.JPG']}")  top right no-repeat;*/
+	background:url(../resources/Images/5.jpg) no-repeat center center fixed ;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+ 	 -o-background-size: cover;
+ 	 background-size: cover;
+	
+ 
+	}
+
+.contenedor{
+	min-height: 1500px;
+
+	margin-left: 10%;
+	margin-right: 10%;
+	background: rgba(255,255,255, 0.8);
+	
+}
+
+ #map {
+ 			     
+            margin-left:30%;
+            width: 80%;
+            height: auto;
+          
+        }

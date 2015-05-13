@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.1.1/css/ol.css" type="text/css">
+	<style>
+		   .map {
+        height: 500px;
+        width: 600px;
+        border:solid 1px;
+      }
+		 
+    </style>
+    <script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>
+    <title>OpenLayers 3 example</title>
+    
+    
+    <script type="text/javascript">
+    
+    
+    var map;
+    var wms;
+    
+
+    
+    
+    var bounds = new OpenLayers.Bounds(558026.625,6134516,588867.1875,6155460.5);
+    
+    var map_controls = [
+                         new OpenLayers.Control.PanZoomBar(), 
+                         new OpenLayers.Control.MouseToolbar(),
+                         
+                         ];
+	var mapoptions = 
+		{ 
+			
+			
+			units: 'm',
+			projection: "EPSG:32721",
+			maxExtent:bounds ,
+			maxResolution: 1000
+			
+			
+	    };
+	
+	function init() {
+		
+	
+		     map = new OpenLayers.Map('map', mapoptions);            
+		            // setup tiled layer
+		           var tiled = new OpenLayers.Layer.WMS(
+		        		   
+                "00departamento", "http://localhost:8080/geoserver/sige/wms",
+                {
+                    LAYERS: 'sige:00departamento'},
+
+                    {projection: new OpenLayers.Projection('EPSG:32721')}
+                    
+                            
+            );
+
+		           // map.addLayer(tiled);
+		            
+		           var saveStrategy = new OpenLayers.Strategy.Save();
+		           var wfs = new OpenLayers.Layer.Vector(
+		                    "ejes",
+		                    {
+		                        strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy]
+		                        , projection: new OpenLayers.Projection("EPSG:32721")
+		                         ,protocol: new OpenLayers.Protocol.WFS({
+		                            version: "1.1.0",
+		                            srsName: "EPSG:32721",
+		                            url: "http://localhost:8080/geoserver/wfs",
+		                            featurePrefix: 'sige', //geoserver worspace name
+		                            featureType: "ejes", //geoserver Layer Name
+		                            featureNS: "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
+		                            geometryName: "geom", // field in Feature Type details with type "Geometry"
+		                            
+		                        })
+		                    
+		                    });
+		       
+		           map.addLayers([tiled, wfs]);
+		            //map.addLayer(wfs);
+		    
+
+		            map.addControl(new OpenLayers.Control.LayerSwitcher());
+		           
+		}
+    
+   
+    	
+      
+   
+    
+    </script>
+  </head>
+   <body onload="init()">
+    <h2>My Map</h2>
+    <div id="map" class="map"></div>
+    
+  </body>
+</html>
