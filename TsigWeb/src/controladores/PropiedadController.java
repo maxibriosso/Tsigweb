@@ -15,10 +15,10 @@ public class PropiedadController implements IPropiedadController{
 	private IPropiedadDAO PropiedadDAO;
 	
 	
-	public boolean guardarPropiedad(int idProp, String direccion,String barrio,String tipoProp, int cantBaños, int cantCuartos,boolean piscina, boolean garage) {
+	public boolean guardarPropiedad(int idProp, String direccion,String barrio,String tipoProp, int cantBanios, int cantCuartos,boolean piscina, boolean garage) {
 		try{
 							
-			Propiedad p = new Propiedad(idProp,direccion,barrio,tipoProp,cantBaños, cantCuartos, piscina, garage);
+			Propiedad p = new Propiedad(idProp,direccion,barrio,tipoProp,cantBanios, cantCuartos, piscina, garage);
 			return PropiedadDAO.guardarPropiedad(p);				
 			
 		

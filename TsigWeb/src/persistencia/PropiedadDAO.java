@@ -7,7 +7,7 @@ import dominio.Propiedad;
 @Stateless
 public class PropiedadDAO implements IPropiedadDAO {
 	
-	@javax.persistence.PersistenceContext(unitName = "Tarea")
+	@javax.persistence.PersistenceContext(unitName = "TsigWeb")
 	private javax.persistence.EntityManager em;
 	
 	public boolean guardarPropiedad(Propiedad prop) {

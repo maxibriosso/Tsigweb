@@ -30,3 +30,20 @@
             height: auto;
           
         }
+        
+.intab{
+	
+	width:96%;
+	min-height:500px;
+	padding: 10px 10px 10px 10px;
+	background: rgba(255,255,255, 1);
+	margin-left: 2%;
+	margin-right: 2%;
+	
+        }
+        
+.outtab{
+	margin-top: 5px;
+	
+
+        }

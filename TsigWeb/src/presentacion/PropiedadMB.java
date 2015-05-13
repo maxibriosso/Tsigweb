@@ -23,7 +23,7 @@ public class PropiedadMB implements Serializable {
 	private String direccion;	
 	private String barrio;	
 	private String tipoProp;	
-	private int cantBaños;		
+	private int cantBanios;		
 	private int cantCuartos;	
 	private boolean garage;	
 	private boolean piscina;
@@ -89,15 +89,15 @@ public class PropiedadMB implements Serializable {
 
 	}
 
-	public Integer getCantBaños(){
+	public Integer getCantBanios(){
 
-		return cantBaños;
+		return cantBanios;
 
 	}
 
-	public void setCantBaños(int cantBaños){
+	public void setCantBanios(int cantBanios){
 
-		this.cantBaños = cantBaños;
+		this.cantBanios = cantBanios;
 
 	}
 
