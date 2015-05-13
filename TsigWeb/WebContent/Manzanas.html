@@ -50,15 +50,11 @@
 		           var tiled = new OpenLayers.Layer.WMS(
 		        		   
                 "00departamento", "http://localhost:8080/geoserver/sige/wms",
-                {
-                    LAYERS: 'sige:00departamento'},
-
-                    {projection: new OpenLayers.Projection('EPSG:32721')}
-                    
+                {LAYERS: 'sige:00departamento',projection: new OpenLayers.Projection('EPSG:32721')}
                             
             );
 
-		           // map.addLayer(tiled);
+		         
 		            
 		           var saveStrategy = new OpenLayers.Strategy.Save();
 		           var wfs = new OpenLayers.Layer.Vector(
@@ -80,11 +76,10 @@
 		                    });
 		       
 		           map.addLayers([tiled, wfs]);
-		            //map.addLayer(wfs);
-		    
 
 		            map.addControl(new OpenLayers.Control.LayerSwitcher());
-		           
+
+		          
 		}
     
    
