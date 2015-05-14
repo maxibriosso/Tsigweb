@@ -3,12 +3,17 @@ package presentacion;
 import java.io.Serializable;
 
 
+
+
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
 
-import persistencia.PropiedadDAO;
 
+
+import controladores.IPropiedadController;
+import persistencia.PropiedadDAO;
 import dominio.Casa;
 
 
@@ -20,25 +25,38 @@ public class PropiedadMB implements Serializable {
 	
 	
 	private int idCasa;	
-	private String direccion;	
+	private int direccion;	
 	private String barrio;	
 	private String tipoProp;	
 	private int cantBanios;		
 	private int cantCuartos;	
 	private boolean garage;	
 	private boolean piscina;
-	  
-	private PropiedadDAO propiedad;	
-	private Casa c;
+	private String titulo;
+	
+	@EJB
+	IPropiedadController ipc;
 	
 	
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+
 	public String guardarPropiedad(){
-		 
-			propiedad.guardarPropiedad(c);
-		  
-			return null;
-			
-		}
+		
+		
+	 
+		ipc.guardarCasa(idCasa,titulo, direccion, barrio, tipoProp, cantBanios, cantCuartos, piscina, garage);
+	  
+		return null;
+		
+	}
 	
 	
 	public int getIdCasa(){
@@ -53,13 +71,13 @@ public class PropiedadMB implements Serializable {
 	
 	}
 
-	public String getDireccion(){
+	public int getDireccion(){
 	
 		return direccion;
 	
 	}
 
-	public void setDireccion(String direccion){
+	public void setDireccion(int direccion){
 	
 		this.direccion = direccion;
 	

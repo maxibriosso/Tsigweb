@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Table(name = "propiedad")
+@Table(name = "casa")
 @Entity
 public class Casa implements Serializable{
 
@@ -18,8 +18,12 @@ public class Casa implements Serializable{
 	@Column(name = "idcasa", nullable = false)
 	private int idCasa;
 	
+	
+	@Column(name = "titulo", nullable = false)
+	private String titulo;
+	
 	@Column(name = "direccion", nullable = false)
-	private String direccion;
+	private int direccion;
 	
 	@Column(name = "barrio", nullable = false)
 	private String barrio;
@@ -44,9 +48,10 @@ public class Casa implements Serializable{
 		
 	}
 	
-	public Casa(int idCasa, String direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage){
+	public Casa(int idCasa,String titulo, int direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage){
 			
 			this.idCasa = idCasa;
+			this.titulo=titulo;
 			this.direccion = direccion;
 			this.barrio = barrio;
 			this.tipoProp = tipoProp;
@@ -59,6 +64,7 @@ public class Casa implements Serializable{
 	
 	public Casa(Casa p){
 		
+			this.titulo=p.getTitulo();
 			this.idCasa = p.getIdCasa();
 		    this.direccion = p.getDireccion();
 		    this.barrio = p.getBarrio();
@@ -70,6 +76,14 @@ public class Casa implements Serializable{
 		
 	}
 	
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 	public int getIdCasa(){
 		
 			return idCasa;
@@ -82,13 +96,13 @@ public class Casa implements Serializable{
 		
 	}
 	
-	public String getDireccion(){
+	public int getDireccion(){
 		
 			return direccion;
 		
 	}
 	
-	public void setDireccion(String direccion){
+	public void setDireccion(int direccion){
 		
 			this.direccion = direccion;
 		

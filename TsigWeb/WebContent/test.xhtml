@@ -52,8 +52,43 @@ $(document).ready(function() {
 <b:tabView activeIndex="0" contentClass="intab" styleClass="outtab">
     <b:tab title="Primer paso" >
     
-        <p>Bienvendio/a en este lugar se daran de alta los datos del inmueble.</p>
+        <p >Bienvendio/a en este lugar se daran de alta los datos del inmueble.</p>
+      
+    <b:panelGrid colSpans="2,10" rowClasses="rowform">
+    
+	    <h:outputLabel value="Titulo de la casa" />
+	    <b:inputText span="8" value="#{propiedadMB.titulo}"/>
+	    
+	    <h:outputLabel value="Barrio de la casa" />
+	    <b:inputText span="8" value="#{propiedadMB.barrio}"/>
+	    
+	    <h:outputLabel value="Barrio de la casa" />	    
+	    <b:inputText span="8" value="#{propiedadMB.barrio}"/>
+	    
+	    <h:outputLabel value="Tipo de propiedad" />	
+	    
+	    <b:selectOneMenu span="8" value="#{propiedadMB.tipoProp}" >
+            <f:selectItem itemLabel="comercial" itemValue="comercial"/>
+            <f:selectItem itemLabel="Residencial" itemValue="Residencial"/>
+        </b:selectOneMenu>
         
+        <h:outputLabel value="Cantidad de baNIos" />	    
+	    <b:inputText span="8" value="#{propiedadMB.cantBanios}"/>
+        
+        <h:outputLabel value="Cantidad de cuartos" />	    
+	    <b:inputText span="8" value="#{propiedadMB.cantCuartos}"/>
+        
+	    
+	    <h:outputLabel value="Piscina: " />
+	    <b:selectBooleanCheckbox value="# {propiedadMB.piscina}" />
+	    
+	    <h:outputLabel value="Garage: " />
+	    <b:selectBooleanCheckbox value="# {propiedadMB.garage}" />
+	    
+
+	    	    
+	</b:panelGrid>
+  
     </b:tab>
     <b:tab title="Segundo paso">
     
