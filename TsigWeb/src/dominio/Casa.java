@@ -8,18 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Table(name = "propiedad")
+@Table(name = "casa")
 @Entity
-public class Propiedad implements Serializable{
+public class Casa implements Serializable{
 
 	private static final long serialVersionUID = 1L; // Mapping JPA
 	
 	@Id
-	@Column(name = "idprop", nullable = false)
-	private int idProp;
+	@Column(name = "idcasa", nullable = false)
+	private int idCasa;
+	
+	
+	@Column(name = "titulo", nullable = false)
+	private String titulo;
 	
 	@Column(name = "direccion", nullable = false)
-	private String direccion;
+	private int direccion;
 	
 	@Column(name = "barrio", nullable = false)
 	private String barrio;
@@ -40,130 +44,110 @@ public class Propiedad implements Serializable{
 	private boolean piscina;
 	
 	
-	public Propiedad(){
+	public Casa(){
 		
 	}
 	
-	public Propiedad(int idProp, String direccion,String barrio,String tipoProp, int cantBanios, int cantCuartos,boolean piscina, boolean garage){
+	public Casa(int idCasa,String titulo, int direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage){
 			
-			this.idProp = idProp;
+			this.idCasa = idCasa;
+			this.titulo=titulo;
 			this.direccion = direccion;
 			this.barrio = barrio;
 			this.tipoProp = tipoProp;
-			this.cantBanios = cantBanios;
+			this.cantBanios = cantbanios;
 			this.cantCuartos = cantCuartos;
 			this.garage = garage;
 			this.piscina = piscina;
 				
 	}
 	
-	public Propiedad(Propiedad p){
+	public Casa(Casa p){
 		
-			this.idProp = p.getIdProp();
+			this.titulo=p.getTitulo();
+			this.idCasa = p.getIdCasa();
 		    this.direccion = p.getDireccion();
 		    this.barrio = p.getBarrio();
 		    this.tipoProp = p.getTipoProp();
 		    this.cantBanios = p.getCantBanios();
 		    this.cantCuartos = p.getCantCuartos();
-		    this.garage = p.getGarage();
-		    this.piscina = p.getPiscina();
+		    this.garage = p.isGarage();
+		    this.piscina = p.isPiscina();
 		
 	}
-	
-	public int getIdProp(){
-		
-			return idProp;
-		
+
+	public int getIdCasa() {
+		return idCasa;
 	}
-	
-	public void setIdProp(int idProp){
-		
-			this.idProp = idProp;
-		
+
+	public void setIdCasa(int idCasa) {
+		this.idCasa = idCasa;
 	}
-	
-	public String getDireccion(){
-		
-			return direccion;
-		
+
+	public String getTitulo() {
+		return titulo;
 	}
-	
-	public void setDireccion(String direccion){
-		
-			this.direccion = direccion;
-		
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
-	
-	public String getBarrio(){
-		
+
+	public int getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(int direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getBarrio() {
 		return barrio;
-	
 	}
 
-	public void setBarrio(String barrio){
-	
+	public void setBarrio(String barrio) {
 		this.barrio = barrio;
-	
 	}
 
-	public String getTipoProp(){
-	
+	public String getTipoProp() {
 		return tipoProp;
-
 	}
 
-	public void setTipoProp(String tipoProp){
-
+	public void setTipoProp(String tipoProp) {
 		this.tipoProp = tipoProp;
-
 	}
 
-	public Integer getCantBanios(){
-	
+	public int getCantBanios() {
 		return cantBanios;
-
 	}
-	
-	public void setCantBanios(int cantBanios){
 
+	public void setCantBanios(int cantBanios) {
 		this.cantBanios = cantBanios;
-
 	}
 
-	public Integer getCantCuartos(){
-	
+	public int getCantCuartos() {
 		return cantCuartos;
-
 	}
 
-	public void setCantCuartos(Integer cantCuartos){
-
+	public void setCantCuartos(int cantCuartos) {
 		this.cantCuartos = cantCuartos;
-
 	}
 
-	public boolean getGarage(){
-	
+	public boolean isGarage() {
 		return garage;
-
 	}
 
-	public void setGarage(boolean garage){
-
+	public void setGarage(boolean garage) {
 		this.garage = garage;
-
 	}
 
-	public boolean getPiscina(){
-	
+	public boolean isPiscina() {
 		return piscina;
-
 	}
 
-	public void setPiscina(boolean piscina){
-
+	public void setPiscina(boolean piscina) {
 		this.piscina = piscina;
-
 	}
+	
+	
 			
 }

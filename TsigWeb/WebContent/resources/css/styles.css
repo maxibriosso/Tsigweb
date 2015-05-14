@@ -23,10 +23,38 @@
 	
 }
 
- #map {
- 			     
+ #map {	     
             margin-left:30%;
             width: 80%;
             height: auto;
           
         }
+        
+.intab{
+	
+	width:96%;
+	min-height:500px;
+	padding: 10px 10px 10px 10px;
+	background: rgba(255,255,255, 1);
+	margin-left: 2%;
+	margin-right: 2%;
+	
+        }
+        
+.outtab{
+	margin-top: 5px;
+	
+
+        }
+.rowform{
+	margin-top: 5px;
+}
+
+/*logo   */
+.navbar-brand > img {
+	width:inherit;
+	height: inherit;
+	
+	
+}
+.navbar-brand {padding: 1px !Important;}

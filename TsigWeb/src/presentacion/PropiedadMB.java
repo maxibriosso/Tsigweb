@@ -3,13 +3,17 @@ package presentacion;
 import java.io.Serializable;
 
 
+
+
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
 
-import persistencia.PropiedadDAO;
 
-import dominio.Propiedad;;
+
+import controladores.IPropiedadController;
+
 
 
 @ManagedBean
@@ -19,123 +23,125 @@ public class PropiedadMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	private int idProp;	
-	private String direccion;	
+	private int idCasa;	
+	private int direccion;	
 	private String barrio;	
 	private String tipoProp;	
 	private int cantBanios;		
 	private int cantCuartos;	
 	private boolean garage;	
 	private boolean piscina;
-	  
-	private PropiedadDAO propiedad;	
-	private Propiedad p;
+	private String titulo;
 	
+	@EJB
+	IPropiedadController ipc;
 	
+
 	public String guardarPropiedad(){
-		 
-			propiedad.guardarPropiedad(p);
-		  
-			return null;
-			
-		}
-	
-	
-	public int getIdProp(){
 		
-		return idProp;
-	
+		System.out.println(titulo+direccion+barrio+ tipoProp+ cantBanios+ cantCuartos+ piscina+ garage);
+	 
+		ipc.guardarCasa(1,titulo, direccion, barrio, tipoProp, cantBanios, cantCuartos, piscina, garage);
+	  
+		return null;
+		
 	}
 
-	public void setIdProp(int idProp){
-	
-		this.idProp = idProp;
-	
+
+	public int getIdCasa() {
+		return idCasa;
 	}
 
-	public String getDireccion(){
-	
+
+	public void setIdCasa(int idCasa) {
+		this.idCasa = idCasa;
+	}
+
+
+	public int getDireccion() {
 		return direccion;
-	
 	}
 
-	public void setDireccion(String direccion){
-	
+
+	public void setDireccion(int direccion) {
 		this.direccion = direccion;
-	
 	}
 
-	public String getBarrio(){
-	
+
+	public String getBarrio() {
 		return barrio;
-
 	}
 
-	public void setBarrio(String barrio){
 
+	public void setBarrio(String barrio) {
 		this.barrio = barrio;
-
 	}
 
-	public String getTipoProp(){
 
+	public String getTipoProp() {
 		return tipoProp;
-
 	}
 
-	public void setTipoProp(String tipoProp){
 
+	public void setTipoProp(String tipoProp) {
 		this.tipoProp = tipoProp;
-
 	}
 
-	public Integer getCantBanios(){
 
+	public int getCantBanios() {
 		return cantBanios;
 
 	}
 
-	public void setCantBanios(int cantBanios){
 
+	public void setCantBanios(int cantBanios) {
 		this.cantBanios = cantBanios;
-
 	}
 
-	public Integer getCantCuartos(){
 
+	public int getCantCuartos() {
 		return cantCuartos;
-
 	}
 
-	public void setCantCuartos(Integer cantCuartos){
 
+	public void setCantCuartos(int cantCuartos) {
 		this.cantCuartos = cantCuartos;
-
 	}
 
-	public boolean getGarage(){
 
+	public boolean isGarage() {
 		return garage;
-
 	}
 
-	public void setGarage(boolean garage){
 
+	public void setGarage(boolean garage) {
 		this.garage = garage;
-
 	}
 
-	public boolean getPiscina(){
 
+	public boolean isPiscina() {
 		return piscina;
-	
 	}
 
-	public void setPiscina(boolean piscina){
 
+	public void setPiscina(boolean piscina) {
 		this.piscina = piscina;
-
 	}
+
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	
+	
+	
+	
+
 	
 	
 }
