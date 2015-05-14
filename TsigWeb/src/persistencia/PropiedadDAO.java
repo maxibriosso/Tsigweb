@@ -10,20 +10,20 @@ public class PropiedadDAO implements IPropiedadDAO {
 	@javax.persistence.PersistenceContext(unitName = "TsigWeb")
 	private javax.persistence.EntityManager em;
 	
-	public boolean guardarPropiedad(Casa Casa) {
+	public boolean guardarPropiedad(Casa casa) {
 		
 		try {
-			
-			em.persist(Casa);
+			System.out.println("proiedad dao"+casa.getTitulo());
+			em.persist(casa);
 			return true;
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
-
+			return false;
 		}
 
-		return false;
+		
 
 	}
 

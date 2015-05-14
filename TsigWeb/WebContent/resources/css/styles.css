@@ -23,8 +23,7 @@
 	
 }
 
- #map {
- 			     
+ #map {	     
             margin-left:30%;
             width: 80%;
             height: auto;
@@ -50,3 +49,12 @@
 .rowform{
 	margin-top: 5px;
 }
+
+/*logo   */
+.navbar-brand > img {
+	width:inherit;
+	height: inherit;
+	
+	
+}
+.navbar-brand {padding: 1px !Important;}

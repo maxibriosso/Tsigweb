@@ -21,21 +21,17 @@ $(document).ready(function() {
 	$("#altaInmueble\\:test").click(function(){
 		alert("dsads");
 	});
-
 });
-
-
-
 
 </script>
 </h:head>
 
 <h:body class="fondo" >
-
+	
 <nav>
-	<b:navBar brand="Brand" brandHref="#" inverse="true" static="true" id="nav">
-	    <b:navbarLinks>
-	        <b:navLink value="Home" href="#"></b:navLink>
+	<b:navBar brandImg="resources/Images/logo.png"  brandHref="#" inverse="true" static="true" id="nav" >
+	    <b:navbarLinks >
+	        <b:navLink  value="Home" href="#"></b:navLink>
 	        <b:navLink value="Link" href="#"></b:navLink>
 	        <b:navLink value="Link" href="#"></b:navLink>
 	    </b:navbarLinks>
@@ -58,10 +54,7 @@ $(document).ready(function() {
     
 	    <h:outputLabel value="Titulo de la casa" />
 	    <b:inputText span="8" value="#{propiedadMB.titulo}"/>
-	    
-	    <h:outputLabel value="Barrio de la casa" />
-	    <b:inputText span="8" value="#{propiedadMB.barrio}"/>
-	    
+	         
 	    <h:outputLabel value="Barrio de la casa" />	    
 	    <b:inputText span="8" value="#{propiedadMB.barrio}"/>
 	    
@@ -100,7 +93,7 @@ $(document).ready(function() {
 </b:tabView>
 
 
-<h:commandButton id="test" value="clickme"></h:commandButton>
+<h:commandButton id="test" value="clickme" action="#{propiedadMB.guardarPropiedad}"></h:commandButton>
 
 </h:form>
 

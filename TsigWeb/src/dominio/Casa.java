@@ -69,13 +69,21 @@ public class Casa implements Serializable{
 		    this.direccion = p.getDireccion();
 		    this.barrio = p.getBarrio();
 		    this.tipoProp = p.getTipoProp();
-		    this.cantBanios = p.getCantbanios();
+		    this.cantBanios = p.getCantBanios();
 		    this.cantCuartos = p.getCantCuartos();
-		    this.garage = p.getGarage();
-		    this.piscina = p.getPiscina();
+		    this.garage = p.isGarage();
+		    this.piscina = p.isPiscina();
 		
 	}
-	
+
+	public int getIdCasa() {
+		return idCasa;
+	}
+
+	public void setIdCasa(int idCasa) {
+		this.idCasa = idCasa;
+	}
+
 	public String getTitulo() {
 		return titulo;
 	}
@@ -84,100 +92,62 @@ public class Casa implements Serializable{
 		this.titulo = titulo;
 	}
 
-	public int getIdCasa(){
-		
-			return idCasa;
-		
+	public int getDireccion() {
+		return direccion;
 	}
-	
-	public void setIdCasa(int idCasa){
-		
-			this.idCasa = idCasa;
-		
+
+	public void setDireccion(int direccion) {
+		this.direccion = direccion;
 	}
-	
-	public int getDireccion(){
-		
-			return direccion;
-		
-	}
-	
-	public void setDireccion(int direccion){
-		
-			this.direccion = direccion;
-		
-	}
-	
-	public String getBarrio(){
-		
+
+	public String getBarrio() {
 		return barrio;
-	
 	}
 
-	public void setBarrio(String barrio){
-	
+	public void setBarrio(String barrio) {
 		this.barrio = barrio;
-	
 	}
 
-	public String getTipoProp(){
-	
+	public String getTipoProp() {
 		return tipoProp;
-
 	}
 
-	public void setTipoProp(String tipoProp){
-
+	public void setTipoProp(String tipoProp) {
 		this.tipoProp = tipoProp;
-
 	}
 
-	public Integer getCantbanios(){
-	
+	public int getCantBanios() {
 		return cantBanios;
-
-	}
-	
-	public void setCantbanios(int cantbanios){
-
-		this.cantBanios = cantbanios;
-
 	}
 
-	public Integer getCantCuartos(){
-	
+	public void setCantBanios(int cantBanios) {
+		this.cantBanios = cantBanios;
+	}
+
+	public int getCantCuartos() {
 		return cantCuartos;
-
 	}
 
-	public void setCantCuartos(Integer cantCuartos){
-
+	public void setCantCuartos(int cantCuartos) {
 		this.cantCuartos = cantCuartos;
-
 	}
 
-	public boolean getGarage(){
-	
+	public boolean isGarage() {
 		return garage;
-
 	}
 
-	public void setGarage(boolean garage){
-
+	public void setGarage(boolean garage) {
 		this.garage = garage;
-
 	}
 
-	public boolean getPiscina(){
-	
+	public boolean isPiscina() {
 		return piscina;
-
 	}
 
-	public void setPiscina(boolean piscina){
-
+	public void setPiscina(boolean piscina) {
 		this.piscina = piscina;
-
 	}
+	
+	
 			
 }

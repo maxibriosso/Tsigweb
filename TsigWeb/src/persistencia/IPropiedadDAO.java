@@ -6,6 +6,6 @@ import dominio.Casa;
 @Local
 public interface IPropiedadDAO {
 	
-	public boolean guardarPropiedad(Casa Casa);
+	public boolean guardarPropiedad(Casa casa);
 
 }
