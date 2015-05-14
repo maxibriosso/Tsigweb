@@ -8,6 +8,19 @@
         width: 600px;
         border:solid 1px;
       }
+       .customEditingToolbar {
+        float: right;
+        right: 0px;
+        height: 30px;
+        width: 220px;
+    }
+    .customEditingToolbar div {
+        float: right;
+        margin: 5px;
+        width: 24px;
+        height: 24px;
+    }
+      
 		 
     </style>
     <script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>
@@ -23,7 +36,7 @@
 
     
     
-    var bounds = new OpenLayers.Bounds(558026.625,6134516,588867.1875,6155460.5);
+    var bounds = new OpenLayers.Bounds(366582.582,6127927,858252.252,6671738);
     
     var map_controls = [
                          new OpenLayers.Control.PanZoomBar(), 
@@ -37,6 +50,7 @@
 			units: 'm',
 			projection: "EPSG:32721",
 			maxExtent:bounds ,
+			center: new OpenLayers.LonLat(574553.537,6141267.75),
 			maxResolution: 1000
 			
 			
@@ -49,8 +63,8 @@
 		            // setup tiled layer
 		           var tiled = new OpenLayers.Layer.WMS(
 		        		   
-                "00departamento", "http://localhost:8080/geoserver/sige/wms",
-                {LAYERS: 'sige:00departamento',projection: new OpenLayers.Projection('EPSG:32721')}
+                "mapabase", "http://localhost:8080/geoserver/sige/wms",
+                {LAYERS: 'sige:mapabase',projection: new OpenLayers.Projection('EPSG:32721')}
                             
             );
 
@@ -74,12 +88,34 @@
 		                        })
 		                    
 		                    });
+		           
+		           var wfs2 = new OpenLayers.Layer.Vector(
+		                    "ejes1",
+		                    {
+		                        strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy]
+		                        , projection: new OpenLayers.Projection("EPSG:32721")
+		                         ,protocol: new OpenLayers.Protocol.WFS({
+		                            version: "1.1.0",
+		                            srsName: "EPSG:32721",
+		                            url: "http://localhost:8080/geoserver/wfs",
+		                            featurePrefix: 'sige', //geoserver worspace name
+		                            featureType: "ejes1", //geoserver Layer Name
+		                            featureNS: "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
+		                            geometryName: "geom", // field in Feature Type details with type "Geometry"
+		                            
+		                        })
+		                    
+		                    });
 		       
-		           map.addLayers([tiled, wfs]);
-
+		           map.addLayers([tiled, wfs,wfs2]);
+		           map.zoomTo(7);
+		           console.log(map.getCenter());
+		           console.log(map.getZoom());	
 		            map.addControl(new OpenLayers.Control.LayerSwitcher());
-
+		            
 		          
+
+		           
 		}
     
    
@@ -91,6 +127,7 @@
   </head>
    <body onload="init()">
     <h2>My Map</h2>
+    <div id="customEditingToolbar" class="customEditingToolbar"></div>
     <div id="map" class="map"></div>
     
   </body>

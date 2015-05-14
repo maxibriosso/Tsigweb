@@ -27,8 +27,8 @@ public class Propiedad implements Serializable{
 	@Column(name = "tipoprop", nullable = false)
 	private String tipoProp;
 	
-	@Column(name = "cantbaños", nullable = false)
-	private int cantBaños;
+	@Column(name = "cantbanios", nullable = false)
+	private int cantBanios;
 	
 	@Column(name = "cantcuartos", nullable = false)
 	private int cantCuartos;
@@ -44,13 +44,13 @@ public class Propiedad implements Serializable{
 		
 	}
 	
-	public Propiedad(int idProp, String direccion,String barrio,String tipoProp, int cantBaños, int cantCuartos,boolean piscina, boolean garage){
+	public Propiedad(int idProp, String direccion,String barrio,String tipoProp, int cantBanios, int cantCuartos,boolean piscina, boolean garage){
 			
 			this.idProp = idProp;
 			this.direccion = direccion;
 			this.barrio = barrio;
 			this.tipoProp = tipoProp;
-			this.cantBaños = cantBaños;
+			this.cantBanios = cantBanios;
 			this.cantCuartos = cantCuartos;
 			this.garage = garage;
 			this.piscina = piscina;
@@ -63,7 +63,7 @@ public class Propiedad implements Serializable{
 		    this.direccion = p.getDireccion();
 		    this.barrio = p.getBarrio();
 		    this.tipoProp = p.getTipoProp();
-		    this.cantBaños = p.getCantBaños();
+		    this.cantBanios = p.getCantBanios();
 		    this.cantCuartos = p.getCantCuartos();
 		    this.garage = p.getGarage();
 		    this.piscina = p.getPiscina();
@@ -118,15 +118,15 @@ public class Propiedad implements Serializable{
 
 	}
 
-	public Integer getCantBaños(){
+	public Integer getCantBanios(){
 	
-		return cantBaños;
+		return cantBanios;
 
 	}
 	
-	public void setCantBaños(int cantBaños){
+	public void setCantBanios(int cantBanios){
 
-		this.cantBaños = cantBaños;
+		this.cantBanios = cantBanios;
 
 	}
 
