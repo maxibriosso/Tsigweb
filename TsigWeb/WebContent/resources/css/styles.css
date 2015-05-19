@@ -23,12 +23,11 @@
 	
 }
 
- #map {	     
-            margin-left:30%;
-            width: 80%;
-            height: auto;
-          
-        }
+   .map {
+        height: 500px;
+        width: 600px;
+        border:solid 1px;
+      }
         
 .intab{
 	

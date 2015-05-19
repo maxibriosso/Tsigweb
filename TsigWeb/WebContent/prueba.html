@@ -59,61 +59,55 @@
 
 		         
 		            
-		           var saveStrategy = new OpenLayers.Strategy.Save();
-		           var wfs = new OpenLayers.Layer.Vector(
+		       
+		           var wfs = new OpenLayers.Layer.WFS(
 		                    "ejes",
+		                    "http://localhost:8080/geoserver/wfs",
+		                    {typename: 'sige:ejes'},
 		                    {
-		                        strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy]
-		                        , projection: new OpenLayers.Projection("EPSG:32721")
-		                         ,protocol: new OpenLayers.Protocol.WFS({
 		                            version: "1.1.0",
 		                            srsName: "EPSG:32721",
-		                            url: "http://localhost:8080/geoserver/wfs",
-		                            featurePrefix: 'sige', //geoserver worspace name
-		                            featureType: "ejes", //geoserver Layer Name
-		                            featureNS: "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
-		                            geometryName: "geom", // field in Feature Type details with type "Geometry"
+		                            typename: 'ejes',
+		                            featureNS: "localhost:8080/geoserver/sige",
+		                            extractAttributes: false,
+		                            geometryName: "geom" // field in Feature Type details with type "Geometry"
 		                            
-		                        })
+		                       
 		                    
 		                    });
 		           
-		           var wfs2 = new OpenLayers.Layer.Vector(
-		                    "ejes1",
+		           var wfs2 = new OpenLayers.Layer.WFS(
+		        		   "ejes1",
+		                    "http://localhost:8080/geoserver/wfs",
+		                    {typename: 'sige:ejes1'},
 		                    {
-		                        strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy]
-		                        , projection: new OpenLayers.Projection("EPSG:32721")
-		                         ,protocol: new OpenLayers.Protocol.WFS({
 		                            version: "1.1.0",
 		                            srsName: "EPSG:32721",
-		                            url: "http://localhost:8080/geoserver/wfs",
-		                            featurePrefix: 'sige', //geoserver worspace name
-		                            featureType: "ejes1", //geoserver Layer Name
-		                            featureNS: "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
-		                            geometryName: "geom", // field in Feature Type details with type "Geometry"
+		                            typename: 'ejes1',
+		                            featureNS: "localhost:8080/geoserver/sige",
+		                            extractAttributes: false,
+		                            geometryName: "geom" // field in Feature Type details with type "Geometry"
 		                            
-		                        })
+		         
 		                    
 		                    });
 		           wfs2.style = OpenLayers.Util.applyDefaults({strokeColor: "#ff0000"}, 
 		                    OpenLayers.Feature.Vector.style["default"]);
 
 		           
-		           var puntos = new OpenLayers.Layer.Vector(
+		           var puntos = new OpenLayers.Layer.WFS(
 		                    "puntos",
+		                    "http://localhost:8080/geoserver/wfs",
+		                    {typename: 'sige:puntos'},
 		                    {
-		                        strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy]
-		                        , projection: new OpenLayers.Projection("EPSG:32721")
-		                         ,protocol: new OpenLayers.Protocol.WFS({
-		                            version: "1.1.0",
+	                                version: "1.1.0",
 		                            srsName: "EPSG:32721",
-		                            url: "http://localhost:8080/geoserver/wfs",
-		                            featurePrefix: 'sige', //geoserver worspace name
-		                            featureType: "puntos", //geoserver Layer Name
-		                            featureNS: "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
-		                            geometryName: "geom", // field in Feature Type details with type "Geometry"
+		                            typename: 'puntos',
+		                            featureNS: "localhost:8080/geoserver/sige",
+		                            extractAttributes: false,
+		                            geometryName: "geom" // field in Feature Type details with type "Geometry"
 		                            
-		                        })
+		                      
 		                    
 		                    });
 		           
@@ -180,7 +174,7 @@
    <body onload="init()">
     <h2>My Map</h2>
     <a href="#" onclick="map.layers[2].commit();return false">Save Calles</a><br />
-    <a href="#" onclick="map.layers[3].save();return false">Save Puntos</a>
+    <a href="#" onclick="map.layers[3].commit();return false">Save Puntos</a>
     <div id="map" class="map"></div>
     
   </body>
