@@ -21,6 +21,9 @@
     
     var map;
     var wms;
+    var puntos;
+    
+    var saveStrategy = new OpenLayers.Strategy.Save({auto:true});
     
 
     
@@ -58,8 +61,7 @@
             );
 
 		         
-		            
-		           var saveStrategy = new OpenLayers.Strategy.Save();
+		          
 		           var wfs = new OpenLayers.Layer.Vector(
 		                    "ejes",
 		                    {
@@ -99,7 +101,7 @@
 		                    OpenLayers.Feature.Vector.style["default"]);
 
 		           
-		           var puntos = new OpenLayers.Layer.Vector(
+		            puntos = new OpenLayers.Layer.Vector(
 		                    "puntos",
 		                    {
 		                        strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy]
@@ -111,7 +113,7 @@
 		                            featurePrefix: 'sige', //geoserver worspace name
 		                            featureType: "puntos", //geoserver Layer Name
 		                            featureNS: "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
-		                            geometryName: "geom", // field in Feature Type details with type "Geometry"
+		                            geometryName: "punto", // field in Feature Type details with type "Geometry"
 		                            
 		                        })
 		                    
@@ -167,6 +169,14 @@
 		            
 		          
 		}
+	
+	function save() {
+		alert("entre");
+		
+		saveStrategy.save(puntos);
+	    alert(puntos.getId());	
+		
+	}
     
    
     	
@@ -177,8 +187,8 @@
   </head>
    <body onload="init()">
     <h2>My Map</h2>
-    <a href="#" onclick="map.layers[2].commit();return false">Save Calles</a><br />
-    <a href="#" onclick="map.layers[3].save();return false">Save Puntos</a>
+   
+    <a href="#" onclick="save();return false">Save Puntos</a>
     <div id="map" class="map"></div>
     
   </body>
