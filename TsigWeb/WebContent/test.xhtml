@@ -14,19 +14,181 @@
 
 <script type="text/javascript"   src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 
+<link rel="stylesheet" href="http://openlayers.org/en/v3.1.1/css/ol.css"
+	type="text/css"></link>
+<style>
+.map {
+	height: 500px;
+	width: 600px;
+	border: solid 1px;
+}
+</style>
+<script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>
+<title>OpenLayers 3 example</title>
+
+
 <script type="text/javascript">
+    
+    var map;
+    var wms;
+    var puntos;
+    
+    var saveStrategy = new OpenLayers.Strategy.Save();
+    saveStrategy.events.on({
+        'success': function(event) {
+             alert('Changes saved');
+        },
+        'fail': function(event) {
+             alert('Error! Changes not saved');
+        },
+        scope: this
+    });
+    
+	var cantidad= 0;
+    var bounds = new OpenLayers.Bounds(366582.582,6127927,858252.252,6671738);
+    
+    var map_controls = [
+                         new OpenLayers.Control.PanZoomBar(), 
+                         new OpenLayers.Control.MouseToolbar(),
+                         
+                         ];
+	var mapoptions = 
+		{ 
+			
+			
+			units: 'm',
+			projection: "EPSG:32721",
+			maxExtent:bounds ,
+			center: new OpenLayers.LonLat(574553.537,6141267.75),
+			maxResolution: 1000
+			
+			
+	    };
+	
+	function init() {
+		
+	
+		     map = new OpenLayers.Map('map', mapoptions);            
+		            // setup tiled layer
+		           var tiled = new OpenLayers.Layer.WMS(
+		        		   
+                "mapabase", "http://localhost:8080/geoserver/sige/wms",
+                {LAYERS: 'sige:mapabase',projection: new OpenLayers.Projection('EPSG:32721')}
+                            
+            );
+		          
+		           var wfs = new OpenLayers.Layer.Vector(
+		                    "ejes",
+		                    {
+		                        strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy]
+		                        , projection: new OpenLayers.Projection("EPSG:32721")
+		                         ,protocol: new OpenLayers.Protocol.WFS({
+		                            version: "1.1.0",
+		                            srsName: "EPSG:32721",
+		                            url: "http://localhost:8080/geoserver/wfs",
+		                            featurePrefix: 'sige', //geoserver worspace name
+		                            featureType: "ejes", //geoserver Layer Name
+		                            featureNS: "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
+		                            geometryName: "geom", // field in Feature Type details with type "Geometry"
+		                            
+		                        })
+		                    
+		                    });
+		           
+		           var wfs2 = new OpenLayers.Layer.Vector(
+		                    "ejes1",
+		                    {
+		                        strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy]
+		                        , projection: new OpenLayers.Projection("EPSG:32721")
+		                         ,protocol: new OpenLayers.Protocol.WFS({
+		                            version: "1.1.0",
+		                            srsName: "EPSG:32721",
+		                            url: "http://localhost:8080/geoserver/wfs",
+		                            featurePrefix: 'sige', //geoserver worspace name
+		                            featureType: "ejes1", //geoserver Layer Name
+		                            featureNS: "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
+		                            geometryName: "geom", // field in Feature Type details with type "Geometry"
+		                            
+		                        })
+		                    
+		                    });
+		           wfs2.style = OpenLayers.Util.applyDefaults({strokeColor: "#ff0000"}, 
+		                    OpenLayers.Feature.Vector.style["default"]);
 
-// Then you can use it
-$(document).ready(function() {
-	$("#altaInmueble\\:test").click(function(){
-		alert("dsads");
-	});
-});
+		           
+		            puntos = new OpenLayers.Layer.Vector(
+		                    "puntos",
+		                    {
+		                        strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy]
+		                        , projection: new OpenLayers.Projection("EPSG:32721")
+		                         ,protocol: new OpenLayers.Protocol.WFS({
+		                            version: "1.1.0",
+		                            srsName: "EPSG:32721",
+		                            url: "http://localhost:8080/geoserver/wfs",
+		                            featurePrefix: 'sige', //geoserver worspace name
+		                            featureType: "puntos", //geoserver Layer Name
+		                            featureNS: "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
+		                            geometryName: "punto", // field in Feature Type details with type "Geometry"
+		                           
+		                        })
+		                    
+		                    });
+		           
+		           puntos.style = OpenLayers.Util.applyDefaults({strokeColor: "#0000ff"}, 
+		                    OpenLayers.Feature.Vector.style["default"]);
+		       
+		           map.addLayers([tiled, wfs,wfs2,puntos]);
+		        
+		           
+		           var panel = new OpenLayers.Control.Panel(
+		                   {displayClass: 'olControlEditingToolbar'}
+		               );
+	               
+		               var drawPoint = new OpenLayers.Control.DrawFeature(
+		            		   puntos, OpenLayers.Handler.Point,
+		                       {displayClass: 'olControlDrawFeaturePoint'}
+		                   );
 
-</script>
+		                	
+							drawPoint.featureAdded = function(feature) {
+								
+								feature.style.strokeColor = "#0000ff";
+
+								feature.attributes.nombre="AIJEEAJIAEJIEAJI";
+
+								feature.state = OpenLayers.State.INSERT;
+
+								var input = document.getElementById('altaInmueble:idcasa');
+								input.value= puntos.features.length;
+								
+								feature.layer.drawFeature(feature);
+								drawPoint.deactivate();
+
+								OpenLayers.Util.removeItem(panel.controls, drawPoint);
+								panel.redraw(); 
+		                   }
+		              	
+		                   panel.addControls(
+		                       [new OpenLayers.Control.Navigation(), drawPoint]
+		                   );
+		                   
+		                   map.addControl(panel);
+		                   map.addControl(new OpenLayers.Control.LayerSwitcher());
+		           
+ 		           map.zoomTo(7);
+ 		           
+ 		      
+					
+			}
+	
+	function save() {
+		saveStrategy.save();
+			
+	}
+    </script>
 </h:head>
 
-<h:body class="fondo" >
+<h:body class="fondo" onload="init()" >
 	
 <nav>
 	<b:navBar brandImg="resources/Images/logo.png"  brandHref="#" inverse="true" static="true" id="nav" >
@@ -45,10 +207,8 @@ $(document).ready(function() {
 
 <h:form id="altaInmueble">
 
-<b:tabView activeIndex="1" contentClass="intab" styleClass="outtab">
-    <b:tab title="Primer paso" >
-    
-        <p >Bienvendio/a en este lugar se daran de alta los datos del inmueble.</p>
+<b:panel id="datos" styleClass="panel panel-primary outtab" title="Paso 1">
+ <p >Bienvendio/a en este lugar se daran de alta los datos del inmueble.</p>
       
     <b:panelGrid colSpans="2,10" rowClasses="rowform">
     
@@ -78,24 +238,26 @@ $(document).ready(function() {
 	    <h:outputLabel value="Garage: " />
 	    <b:selectBooleanCheckbox value="# {propiedadMB.garage}" />
 	    
-
-	    	    
+		    
 	</b:panelGrid>
+</b:panel>
+
+  <b:panel id="mapa" styleClass="panel panel-primary " title="Paso 2">
   
-    </b:tab>
-    <b:tab title="Segundo paso">
+  <p>Marque en el mapa donde se encuentra el inmueble.</p>
+  	
+  
+  <div id="map" class="map"></div>
+  
+  
+  
+  </b:panel>
+  
+    <h:inputHidden value="#{propiedadMB.idCasa}" id="idcasa" />
     
-        <p>Marque en el mapa donde se encuentra el inmueble.</p>
-        
-       
-        <ui:include src="map.xhtml"></ui:include>
-    </b:tab>
-    
- 
-</b:tabView>
+	
 
-
-<h:commandButton id="test" value="clickme" action="#{propiedadMB.guardarPropiedad}"></h:commandButton>
+<h:commandButton id="save" value="clickme" type="submit" action="#{propiedadMB.guardarPropiedad}"></h:commandButton>	
 
 </h:form>
 

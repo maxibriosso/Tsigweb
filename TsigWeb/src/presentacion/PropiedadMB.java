@@ -1,6 +1,8 @@
 package presentacion;
 
+
 import java.io.Serializable;
+
 
 
 
@@ -8,6 +10,7 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+
 
 
 
@@ -39,10 +42,11 @@ public class PropiedadMB implements Serializable {
 
 	public String guardarPropiedad(){
 		
-		System.out.println(titulo+direccion+barrio+ tipoProp+ cantBanios+ cantCuartos+ piscina+ garage);
-	 
-		ipc.guardarCasa(1,titulo, direccion, barrio, tipoProp, cantBanios, cantCuartos, piscina, garage);
-	  
+		//System.out.println(idCasa+titulo+direccion+barrio+ tipoProp+ cantBanios+ cantCuartos+ piscina+ garage);
+		
+	
+		 ipc.guardarCasa(2,titulo, direccion, barrio, tipoProp, cantBanios, cantCuartos, piscina, garage);
+	
 		return null;
 		
 	}

@@ -1,23 +1,22 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <link rel="stylesheet" href="http://openlayers.org/en/v3.1.1/css/ol.css" type="text/css">
-	<style>
-		   .map {
-        height: 500px;
-        width: 600px;
-        border:solid 1px;
-      }
-     
-      
-		 
-    </style>
-    <script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>
-    <title>OpenLayers 3 example</title>
-    
-    
-    <script type="text/javascript">
-    
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<head>
+<link rel="stylesheet" href="http://openlayers.org/en/v3.1.1/css/ol.css"
+	type="text/css"></link>
+<style>
+.map {
+	height: 500px;
+	width: 600px;
+	border: solid 1px;
+}
+</style>
+<script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>
+<title>OpenLayers 3 example</title>
+
+
+<script type="text/javascript">
     
     var map;
     var wms;
@@ -34,9 +33,7 @@
         scope: this
     });
     
-
-    
-    
+	var cantidad= 0;
     var bounds = new OpenLayers.Bounds(366582.582,6127927,858252.252,6671738);
     
     var map_controls = [
@@ -68,8 +65,6 @@
                 {LAYERS: 'sige:mapabase',projection: new OpenLayers.Projection('EPSG:32721')}
                             
             );
-
-		         
 		          
 		           var wfs = new OpenLayers.Layer.Vector(
 		                    "ejes",
@@ -123,7 +118,7 @@
 		                            featureType: "puntos", //geoserver Layer Name
 		                            featureNS: "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
 		                            geometryName: "punto", // field in Feature Type details with type "Geometry"
-		                            
+		                           
 		                        })
 		                    
 		                    });
@@ -132,68 +127,70 @@
 		                    OpenLayers.Feature.Vector.style["default"]);
 		       
 		           map.addLayers([tiled, wfs,wfs2,puntos]);
+		        
 		           
 		           var panel = new OpenLayers.Control.Panel(
 		                   {displayClass: 'olControlEditingToolbar'}
 		               );
-		           var drawLine = new OpenLayers.Control.DrawFeature(
-		        		   wfs2, OpenLayers.Handler.Path,
-		                   {displayClass: 'olControlDrawFeaturePath'}
-		               );
-		               drawLine.featureAdded = function(feature) {
-		                   feature.layer.eraseFeatures([feature]);
-		                   // cast to multilinestring
-		                   feature.geometry = new OpenLayers.Geometry.MultiLineString(
-		                       feature.geometry
-		                   );
-		                   feature.style.strokeColor = "#ff0000";
-		                   feature.state = OpenLayers.State.INSERT;
-		                   feature.layer.drawFeature(feature);
-		               }
+	               
 		               var drawPoint = new OpenLayers.Control.DrawFeature(
 		            		   puntos, OpenLayers.Handler.Point,
 		                       {displayClass: 'olControlDrawFeaturePoint'}
 		                   );
-		                   drawPoint.featureAdded = function(feature) {
-			                   
-		                  /*     feature.layer.eraseFeatures([feature]);
-		                       // cast to multipoint
-		                       feature.geometry = new OpenLayers.Geometry.MultiPoint(
-		                           feature.geometry
-		                       );*/
-		                       feature.attributes.nombre="Maycol";
-		                       feature.style.strokeColor = "#0000ff";
-		                       feature.state = OpenLayers.State.INSERT;
-		                       feature.layer.drawFeature(feature);
+
+		                	
+							drawPoint.featureAdded = function(feature) {
+								
+								feature.style.strokeColor = "#0000ff";
+
+								feature.attributes.nombre="AIJEEAJIAEJIEAJI";
+
+								feature.state = OpenLayers.State.INSERT;
+
+								var input = document.getElementById('altaInmueble:idcasa');
+								input.value= puntos.features.length;
+								
+								feature.layer.drawFeature(feature);
+								drawPoint.deactivate();
+
+								OpenLayers.Util.removeItem(panel.controls, drawPoint);
+								panel.redraw(); 
 		                   }
 		              	
 		                   panel.addControls(
-		                       [new OpenLayers.Control.Navigation(), drawLine, drawPoint]
+		                       [new OpenLayers.Control.Navigation(), drawPoint]
 		                   );
 		                   
 		                   map.addControl(panel);
 		                   map.addControl(new OpenLayers.Control.LayerSwitcher());
 		           
  		           map.zoomTo(7);
+ 		           
 // 		           console.log(map.getCenter());
 // 		           console.log(map.getZoom());	
-// 		            map.addControl(new OpenLayers.Control.LayerSwitcher());
-		            
-		}
+// 		           map.addControl(new OpenLayers.Control.LayerSwitcher());
+
+ 		      
+					
+			}
 	
 	function save() {
-	
-
+		var input = document.getElementById('altaInmueble:idcasa');
+		alert(input.value);
 		 saveStrategy.save();
-		
+			
 	}
     </script>
-  </head>
-   <body onload="init()">
-    <h2>My Map</h2>
-   
-    <a href="#" onclick="save();return false">Save Puntos</a>
-    <div id="map" class="map"></div>
-    
-  </body>
-</html>
+	</head>
+	<body onload="init()">
+	
+		
+		
+		<a href="#" onclick="save();return false">Save Puntos</a>
+		<div id="map" class="map"></div>
+		
+		
+
+	</body>
+
+</ui:composition>

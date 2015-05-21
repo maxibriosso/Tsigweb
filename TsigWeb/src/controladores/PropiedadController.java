@@ -4,9 +4,9 @@ package controladores;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import dominio.Casa;
 import persistencia.IPropiedadDAO;
 import controladores.IPropiedadController;
+import dominio.Casa;
 
 @Stateless
 public class PropiedadController implements IPropiedadController{

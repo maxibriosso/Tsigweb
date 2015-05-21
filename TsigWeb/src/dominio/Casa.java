@@ -17,8 +17,7 @@ public class Casa implements Serializable{
 	@Id
 	@Column(name = "idcasa", nullable = false)
 	private int idCasa;
-	
-	
+		
 	@Column(name = "titulo", nullable = false)
 	private String titulo;
 	
