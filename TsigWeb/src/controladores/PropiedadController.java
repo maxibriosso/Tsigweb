@@ -20,7 +20,7 @@ public class PropiedadController implements IPropiedadController{
 		try{
 							
 
-			Casa c = new Casa(idCasa,titulo,direccion,barrio,tipoProp,cantBanios, cantCuartos, piscina, garage);
+			Casa c = new Casa(titulo,direccion,barrio,tipoProp,cantBanios, cantCuartos, piscina, garage);
 			
 			return PropiedadDAO.guardarPropiedad(c);				
 

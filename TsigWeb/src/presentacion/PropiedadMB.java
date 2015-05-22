@@ -5,12 +5,15 @@ import java.io.Serializable;
 
 
 
+
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
 
 
+
+import javax.faces.context.FacesContext;
 
 import controladores.IPropiedadController;
 
@@ -40,6 +43,9 @@ public class PropiedadMB implements Serializable {
 	public String guardarPropiedad(){
 		
 		System.out.println(titulo+direccion+barrio+ tipoProp+ cantBanios+ cantCuartos+ piscina+ garage);
+		
+		//String test = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("hiden1");
+		//int tt = Integer.parseInt(test);
 	 
 		ipc.guardarCasa(1,titulo, direccion, barrio, tipoProp, cantBanios, cantCuartos, piscina, garage);
 	  

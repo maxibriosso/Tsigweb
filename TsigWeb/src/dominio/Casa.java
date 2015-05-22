@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
@@ -14,7 +17,12 @@ public class Casa implements Serializable{
 
 	private static final long serialVersionUID = 1L; // Mapping JPA
 	
+	
+	
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "idcasa_seq")
+    @SequenceGenerator(name = "idcasa_seq", sequenceName = "idcasa_seq")
 	@Column(name = "idcasa", nullable = false)
 	private int idCasa;
 	
@@ -61,6 +69,19 @@ public class Casa implements Serializable{
 			this.piscina = piscina;
 				
 	}
+	public Casa(String titulo, int direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage){
+		
+		
+		this.titulo=titulo;
+		this.direccion = direccion;
+		this.barrio = barrio;
+		this.tipoProp = tipoProp;
+		this.cantBanios = cantbanios;
+		this.cantCuartos = cantCuartos;
+		this.garage = garage;
+		this.piscina = piscina;
+			
+}
 	
 	public Casa(Casa p){
 		
