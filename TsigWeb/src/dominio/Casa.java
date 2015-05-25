@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
@@ -14,7 +17,12 @@ public class Casa implements Serializable{
 
 	private static final long serialVersionUID = 1L; // Mapping JPA
 	
+	
+	
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "casa_idcasa_seq")
+    @SequenceGenerator(name = "casa_idcasa_seq", sequenceName = "casa_idcasa_seq",allocationSize=1)
 	@Column(name = "idcasa", nullable = false)
 	private int idCasa;
 		
@@ -23,6 +31,9 @@ public class Casa implements Serializable{
 	
 	@Column(name = "direccion", nullable = false)
 	private int direccion;
+	
+	@Column(name = "idGeom", nullable = false)
+	private int idGeom;
 	
 	@Column(name = "barrio", nullable = false)
 	private String barrio;
@@ -47,8 +58,9 @@ public class Casa implements Serializable{
 		
 	}
 	
-	public Casa(int idCasa,String titulo, int direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage){
+	public Casa(int idGeom,int idCasa,String titulo, int direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage){
 			
+			this.idGeom=idGeom;
 			this.idCasa = idCasa;
 			this.titulo=titulo;
 			this.direccion = direccion;
@@ -60,9 +72,23 @@ public class Casa implements Serializable{
 			this.piscina = piscina;
 				
 	}
+	public Casa(int idGeom,String titulo, int direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage){
+		
+		this.idGeom=idGeom;
+		this.titulo=titulo;
+		this.direccion = direccion;
+		this.barrio = barrio;
+		this.tipoProp = tipoProp;
+		this.cantBanios = cantbanios;
+		this.cantCuartos = cantCuartos;
+		this.garage = garage;
+		this.piscina = piscina;
+			
+}
 	
 	public Casa(Casa p){
 		
+			this.idGeom=p.getIdGeom();
 			this.titulo=p.getTitulo();
 			this.idCasa = p.getIdCasa();
 		    this.direccion = p.getDireccion();
@@ -73,6 +99,14 @@ public class Casa implements Serializable{
 		    this.garage = p.isGarage();
 		    this.piscina = p.isPiscina();
 		
+	}
+
+	public int getIdGeom() {
+		return idGeom;
+	}
+
+	public void setIdGeom(int idGeom) {
+		this.idGeom = idGeom;
 	}
 
 	public int getIdCasa() {

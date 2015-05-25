@@ -16,16 +16,12 @@ public class PropiedadController implements IPropiedadController{
 	
 	
 
-	public boolean guardarCasa(int idCasa,String titulo, int direccion,String barrio,String tipoProp, int cantBanios, int cantCuartos,boolean piscina, boolean garage) {
+	public boolean guardarCasa(int IdGeom,int idCasa,String titulo, int direccion,String barrio,String tipoProp, int cantBanios, int cantCuartos,boolean piscina, boolean garage) {
 		try{
-							
-
-			Casa c = new Casa(idCasa,titulo,direccion,barrio,tipoProp,cantBanios, cantCuartos, piscina, garage);
-			
+					
+			Casa c = new Casa(IdGeom, titulo, direccion, barrio, tipoProp, cantBanios, cantCuartos, piscina, garage);
 			return PropiedadDAO.guardarPropiedad(c);				
 
-			
-		
 		}		
 			
 		catch(Exception e){
@@ -35,7 +31,4 @@ public class PropiedadController implements IPropiedadController{
 		
 	}
 
-
-		
-	
 }

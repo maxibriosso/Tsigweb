@@ -17,10 +17,20 @@
 <link rel="stylesheet" href="http://openlayers.org/en/v3.1.1/css/ol.css"
 	type="text/css"></link>
 <style>
+.mapWrap{	display: block;
+ 	 		margin-left: auto;
+ 			margin-right: auto;
+ 	 width: 80%;
+ 	 height: 80%;
+ 	 }
 .map {
-	height: 500px;
-	width: 600px;
+
+
+	height: 100%;
+	width: 100%;
+	
 	border: solid 1px;
+	
 }
 </style>
 <script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>
@@ -136,7 +146,13 @@
 		           
 		           puntos.style = OpenLayers.Util.applyDefaults({strokeColor: "#0000ff"}, 
 		                    OpenLayers.Feature.Vector.style["default"]);
-		       
+		           puntos.style.externalGraphic="resources/Images/casa.png";
+		           puntos.style.graphicWidth= 40;
+		           puntos.style.graphicHeight= 32;
+		           puntos.style.fillOpacity=1;
+
+
+			       
 		           map.addLayers([tiled, wfs,wfs2,puntos]);
 		        
 		           
@@ -160,7 +176,7 @@
 
 								var input = document.getElementById('altaInmueble:idcasa');
 								input.value= puntos.features.length;
-								
+								alert(input.value);
 								feature.layer.drawFeature(feature);
 								
 								drawPoint.deactivate();
@@ -190,18 +206,7 @@
 
 <h:body class="fondo" onload="init()" >
 	
-<nav>
-	<b:navBar brandImg="resources/Images/logo.png"  brandHref="#" inverse="true" static="true" id="nav" >
-	    <b:navbarLinks >
-	        <b:navLink  value="Home" href="#"></b:navLink>
-	        <b:navLink value="Link" href="#"></b:navLink>
-	        <b:navLink value="Link" href="#"></b:navLink>
-	    </b:navbarLinks>
-	    
-	</b:navBar>
-	
-	<div id="NavDecoration" style="background-color:#2b4890; width:100%;height:30px;"></div>
-</nav>
+<ui:include src="/navbar.xhtml" />
 
 <div id="cont" class="contenedor">
 
@@ -246,18 +251,21 @@
   
   <p>Marque en el mapa donde se encuentra el inmueble.</p>
   	
-  
+  <div id="mapWrap" class="mapWrap">
   <div id="map" class="map"></div>
-  
-  
-  
+  </div>	
+     
+	    <h:outputLabel value="Direccion del inmueble" />
+	    <b:inputText span="4" value="#{propiedadMB.direccion}" />
+ 	
+  <h:commandButton id="save" value="Guardar Inmueble" type="submit" onclick="save()" action="#{propiedadMB.guardarPropiedad}"></h:commandButton>	
   </b:panel>
   
     <h:inputHidden value="#{propiedadMB.idCasa}" id="idcasa" />
     
-	
 
-<h:commandButton id="save" value="clickme" type="submit" action="#{propiedadMB.guardarPropiedad}"></h:commandButton>	
+
+
 
 </h:form>
 
