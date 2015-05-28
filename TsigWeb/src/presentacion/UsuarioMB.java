@@ -3,9 +3,9 @@ package presentacion;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import controladores.IUsuarioController;
@@ -27,6 +27,8 @@ public class UsuarioMB implements Serializable {
 	 private String mail;
 	 
 	 private String password;
+	 
+	 private boolean log ;
 	 
 	public void altaUsuario()
 	{	
@@ -59,25 +61,25 @@ public class UsuarioMB implements Serializable {
 		System.out.println("login");
 		  
 		try {
-
-			
-			    
+			this.setLog(true);
+			this.log=true;
 			if (iuc.autenticarUsuario(this.nombre, this.password) ) {	
 				
+		
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", this.nombre);
-				FacesContext.getCurrentInstance().getExternalContext().redirect("index.html");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 				
 			}
 			else{				
 				
-				
+				this.log=false;
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Credenciales incorrectas o Perfil deshabilitado"));
 				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-						
+				
 				
 			}		
 			} catch (Exception e) {
-			System.out.println(e.getLocalizedMessage());
+				this.log=true;
 			e.printStackTrace();
 		}
 		
@@ -89,6 +91,7 @@ public class UsuarioMB implements Serializable {
 
 
 		try {
+			this.log=false;
 			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.html");
 			
@@ -122,5 +125,15 @@ public class UsuarioMB implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public boolean isLog() {
+		return log;
+	}
+
+	public void setLog(boolean log) {
+		this.log = log;
+	}
+
+
 
 }
