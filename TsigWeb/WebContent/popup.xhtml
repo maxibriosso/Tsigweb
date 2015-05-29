@@ -10,8 +10,6 @@
       <h:outputStylesheet library="css" name="styles.css" />
      
  <script  src="http://code.jquery.com/jquery-2.1.4.min.js">	 </script>
-	 <script  src="https://raw.githubusercontent.com/dinbror/bpopup/master/jquery.bpopup.min.js">	 </script>
-	 <h:outputScript library="js" name="jquery.bpopup.min.js" ></h:outputScript>
 	
 	<style>
 		   .map {
@@ -28,7 +26,7 @@
     </style>
     <script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>
 
-	<script type="text/javascript" src="/jquery.bpopup.min.js">	 </script>
+
 	 
 	 
     <title>OpenLayers 3 example</title>
@@ -74,46 +72,11 @@
                 {LAYERS: 'sige:mapabase',projection: new OpenLayers.Projection('EPSG:32721')}
                             
             );
+		          
+		      
+		           
 
 		         
-		          
-		           var wfs = new OpenLayers.Layer.Vector(
-		                    "ejes",
-		                    {
-		                        strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy]
-		                        , projection: new OpenLayers.Projection("EPSG:32721")
-		                         ,protocol: new OpenLayers.Protocol.WFS({
-		                            version: "1.1.0",
-		                            srsName: "EPSG:32721",
-		                            url: "http://localhost:8080/geoserver/wfs",
-		                            featurePrefix: 'sige', //geoserver worspace name
-		                            featureType: "ejes", //geoserver Layer Name
-		                            featureNS: "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
-		                            geometryName: "geom", // field in Feature Type details with type "Geometry"
-		                            
-		                        })
-		                    
-		                    });
-		           
-		           var wfs2 = new OpenLayers.Layer.Vector(
-		                    "ejes1",
-		                    {
-		                        strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy]
-		                        , projection: new OpenLayers.Projection("EPSG:32721")
-		                         ,protocol: new OpenLayers.Protocol.WFS({
-		                            version: "1.1.0",
-		                            srsName: "EPSG:32721",
-		                            url: "http://localhost:8080/geoserver/wfs",
-		                            featurePrefix: 'sige', //geoserver worspace name
-		                            featureType: "ejes1", //geoserver Layer Name
-		                            featureNS: "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
-		                            geometryName: "geom", // field in Feature Type details with type "Geometry"
-		                            
-		                        })
-		                    
-		                    });
-		           wfs2.style = OpenLayers.Util.applyDefaults({strokeColor: "#ff0000"}, 
-		                    OpenLayers.Feature.Vector.style["default"]);
 
 		           
 		            puntos = new OpenLayers.Layer.Vector(
@@ -144,7 +107,7 @@
 		           puntos.style.fillOpacity=1;
 
 		       
-		           map.addLayers([tiled, wfs,wfs2,puntos]);
+		           map.addLayers([tiled,puntos]);
 		           
 		           var panel = new OpenLayers.Control.Panel(
 		                   {displayClass: 'olControlEditingToolbar'}
@@ -158,17 +121,7 @@
 
 		                   drawPoint.featureAdded = function(feature) {
 
-			                   
-		                  /*     feature.layer.eraseFeatures([feature]);
-		                       // cast to multipoint
-		                       feature.geometry = new OpenLayers.Geometry.MultiPoint(
-		                           feature.geometry
-		                       );*/
 		                       feature.attributes.nombre="Maycol";
-
-		                	    		                      
-		                   
-
 		                       feature.style.strokeColor = "#0000ff";
 		                       feature.state = OpenLayers.State.INSERT;
 		                       feature.layer.drawFeature(feature);
@@ -180,43 +133,35 @@
 		                       autoActivate: true
 		                   });
 		                   map.addControl(selectFeature);
-		             
-		                   
 
 		                   panel.addControls(
 		                       [new OpenLayers.Control.Navigation(),drawPoint]
 		                   );
-		                   
-		                   
 		                   map.addControl(panel);
 		                   map.addControl(new OpenLayers.Control.LayerSwitcher());
 		           
  		           map.zoomTo(7);
  		           
-
- 		          
  		         function clickNotice(event) {
  		        	
-	        	        var id = event.attributes.nombre;
+	        	        var id = event.attributes.numpunto;
 	        	        
 	        	        var output =   id ;
-	        	        
+
+
+	        	        document.getElementById('atrigger').click();
+
+	        	        	        	        
 	        	        document.getElementById("output-id").innerHTML = output;
-	        	        $("#testpopup").bPopup();
+	        	        selectFeature.unselectAll();
  		        }          
 		            
 		}
 	
 	function save() {
-
-	
-
-
+		
 		alert("entre");
 		saveStrategy.save();
-		
-		
-
 		
 	}
 
@@ -247,14 +192,16 @@
     
     
 	<b:modal id="amodal" title="Modal Example" >
-		<p>Modal body</p>
+		<p>una casa propia<br/>
+			cocina tuto, propia
+		
+		
+		</p>
 	    <f:facet name="footer">
 	        <b:button value="close" dismiss="modal" onclick="return false;"/>
 	        <b:button value="Ok" look="primary" dismiss="modal" onclick="return false;"/>
 	    </f:facet>
 	</b:modal>
-
-
   </div>
   </h:body>
 </html>

@@ -6,8 +6,6 @@
 		<class>dominio.Casa</class>
 		<properties>
 			<property name="hibernate.id.new_generator_mappings" value="false"/>
-
-		</properties>
-		</persistence-unit>
-	
+			
+		</properties>	</persistence-unit>
 </persistence>

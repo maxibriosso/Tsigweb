@@ -131,12 +131,13 @@
 								
 								feature.style.strokeColor = "#0000ff";
 
-								feature.attributes.nombre="AIJEEAJIAEJIEAJI";
-
 								feature.state = OpenLayers.State.INSERT;
 
 								var input = document.getElementById('altaInmueble:idcasa');
 								input.value= puntos.features.length;
+								
+								feature.attributes.numpunto=input.value;
+								
 								alert(input.value);
 								feature.layer.drawFeature(feature);
 								
