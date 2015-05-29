@@ -1,6 +1,7 @@
 package dominio;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -22,9 +23,8 @@ public class Usuario implements Serializable {
 	// @NotNull
 	private String password;
 	
-	
-
-	
+	@OneToMany(mappedBy="encargado", cascade=CascadeType.ALL)  
+	private Set<Casa> casas;  
 
 	public Usuario() {
 
@@ -69,6 +69,23 @@ public class Usuario implements Serializable {
 		this.password = password;
 	}
 
+	public Set<Casa> getCasas() {
+		return casas;
+	}
+
+	public void setCasas(Set<Casa> casas) {
+		this.casas = casas;
+	}
+	public void addCasa(Casa c){
+		
+		this.casas.add(c);
+		
+	}
+	public void removeCasa(Casa c){
+		
+		this.casas.remove(c);
+		
+	}
 	
 	
 	
