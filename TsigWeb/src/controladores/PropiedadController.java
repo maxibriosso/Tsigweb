@@ -19,7 +19,7 @@ public class PropiedadController implements IPropiedadController{
 	private IUsuarioDAO UsuarioDAO;
 	
 
-	public boolean guardarCasa(String usuario,int IdGeom,int idCasa,String titulo, int direccion,String barrio,String tipoProp, int cantBanios, int cantCuartos,boolean piscina, boolean garage) {
+	public boolean guardarCasa(String usuario,int IdGeom,String titulo, int direccion,String barrio,String tipoProp, int cantBanios, int cantCuartos,boolean piscina, boolean garage) {
 		try{
 					
 			Casa c = new Casa(IdGeom, titulo, direccion, barrio, tipoProp, cantBanios, cantCuartos, piscina, garage,"privada");

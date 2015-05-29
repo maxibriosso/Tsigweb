@@ -52,7 +52,10 @@ public class PropiedadMB implements Serializable {
 			
 			String usuario =(String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 			System.out.println("USUARIOOOOOOO: "+usuario);
-			ipc.guardarCasa(usuario,idCasa,0,titulo, direccion, barrio, tipoProp, cantBanios, cantCuartos, piscina, garage);
+			
+			
+			ipc.guardarCasa(usuario,idCasa,titulo, direccion, barrio, tipoProp, cantBanios, cantCuartos, piscina, garage);
+			
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.html");
 			
 			
