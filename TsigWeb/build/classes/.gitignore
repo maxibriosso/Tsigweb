@@ -1,4 +1,5 @@
-/dominio/
-/presentacion/
-/controladores/
 /META-INF/
+/controladores/
+/dominio/
+/persistencia/
+/presentacion/
