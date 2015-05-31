@@ -43,27 +43,33 @@ function init() {
 
 	);
 
-	var wfs = new OpenLayers.Layer.Vector("ejes", {
+	polygonLayer = new OpenLayers.Layer.Vector("ZonaGeom", {
 		strategies : [ new OpenLayers.Strategy.BBOX(), saveStrategy ],
 		projection : new OpenLayers.Projection("EPSG:32721"),
 		protocol : new OpenLayers.Protocol.WFS({
 			version : "1.1.0",
 			srsName : "EPSG:32721",
 			url : "http://localhost:8080/geoserver/wfs",
-			featurePrefix : 'sige', //geoserver worspace name
-			featureType : "ejes", //geoserver Layer Name
-			featureNS : "localhost:8080/geoserver/sige", // Edit Workspace Namespace URI
-			geometryName : "geom", // field in Feature Type details with type "Geometry"
+			featurePrefix : 'sige', // geoserver worspace name
+			featureType : "ZonaGeom", // geoserver Layer Name
+			featureNS : "localhost:8080/geoserver/sige", // Edit Workspace
+			// Namespace URI
+			geometryName : "geom", // field in Feature Type details with type
+		// "Geometry"
 
 		})
 
 	});
-    
 
-    var polygonLayer = new OpenLayers.Layer.Vector("Polygon Layer");
+	    
+
+    //var polygonLayer = new OpenLayers.Layer.Vector("Polygon Layer");
     var boxLayer = new OpenLayers.Layer.Vector("Box layer");
 	
-    map.addLayers([ tiled, wfs, polygonLayer, boxLayer ]);
+    map.addLayers([ tiled, polygonLayer, boxLayer ]);    
+    map.addControl(new OpenLayers.Control.LayerSwitcher());    
+    map.zoomTo(7);
+    
 
 	drawControls = {
 		polygon : new OpenLayers.Control.DrawFeature(polygonLayer,
@@ -75,11 +81,28 @@ function init() {
 						irregular : true
 					}
 				})
-	}
-	
+	}	
 	for(var key in drawControls) {
-        map.addControl(drawControls[key]);
+        map.addControl(drawControls[key]);	//Agrega todos los draw q estan en el arreglo drawControls 
     }
+	
+	drawControls[0].featureAdded = function(feature) {	//drawControls[0] = polygon
+		
+		feature.attributes.nombre="ZonaPolygon";
+        feature.style.strokeColor = "#0000ff";
+        feature.state = OpenLayers.State.INSERT;
+        feature.layer.drawFeature(feature);
+			
+		
+   }
+	
+}
+
+function save() {
+
+	alert("entre");
+	saveStrategy.save();
+
 }
 
 function toggleControl(element) {
