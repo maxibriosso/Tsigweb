@@ -45,11 +45,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 	public boolean existeUsuario(String nombre) {
 
-		Usuario u = em.find(Usuario.class, nombre); // Si no se
-																// encuentra a
-																// la persona,
-																// se retorna
-																// NULL
+		Usuario u = em.find(Usuario.class, nombre); // Si no se	encuentra a	la persona se retorna NULL
 
 		if (u != null)
 			return true;

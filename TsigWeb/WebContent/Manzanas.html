@@ -16,6 +16,11 @@
 		 
     </style>
     <script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>
+        
+	 <script  src="http://code.jquery.com/jquery-2.1.4.min.js">	 </script>
+	 <script  src="https://raw.githubusercontent.com/dinbror/bpopup/master/jquery.bpopup.min.js">	 </script>
+	 
+	 
     <title>OpenLayers 3 example</title>
     
     
@@ -187,6 +192,10 @@
 	        	        var output = 
 	        	              id ;
 	        	        document.getElementById("output-id").innerHTML = output;
+	        	        $("#testpopup").bPopup({
+	        	        	modalClose: false
+
+		        	        });
  		        }          
 		            
 		}
@@ -212,7 +221,8 @@
     <a href="#" onclick="save();return false">Save Puntos</a>
     <div id="map" class="map"></div>
     <div id="output-id"></div>
-  
+    
+ <div id="testpopup" hidden="true" style="width:20%; background-color:white;min-heigth:20%!Important;">dsdsdsdsdsdsdsdsdssdsd</div>
     
   </body>
 </html>

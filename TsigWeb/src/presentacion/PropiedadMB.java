@@ -1,7 +1,11 @@
 package presentacion;
 
 
+import java.io.IOException;
 import java.io.Serializable;
+
+
+
 
 
 
@@ -19,6 +23,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 import controladores.IPropiedadController;
+import dominio.Casa;
 
 
 
@@ -41,26 +46,53 @@ public class PropiedadMB implements Serializable {
 	
 	@EJB
 	IPropiedadController ipc;
-	
 
 	public String guardarPropiedad(){
 		
 
-		//System.out.println(idCasa+titulo+direccion+barrio+ tipoProp+ cantBanios+ cantCuartos+ piscina+ garage);
-		
-
-	
-		 ipc.guardarCasa(idCasa,0,titulo, direccion, barrio, tipoProp, cantBanios, cantCuartos, piscina, garage);
-		
-
-		System.out.println(titulo+direccion+barrio+ tipoProp+ cantBanios+ cantCuartos+ piscina+ garage);
-		
-		
-	 
-		//ipc.guardarCasa(1,titulo, direccion, barrio, tipoProp, cantBanios, cantCuartos, piscina, garage);
-	  
+		try {
+			
+			String usuario =(String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+			System.out.println("USUARIOOOOOOO: "+usuario);
+			
+			
+			ipc.guardarCasa(usuario,idCasa,titulo, direccion, barrio, tipoProp, cantBanios, cantCuartos, piscina, garage);
+			
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.html");
+			
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return null;
+		
+	}
+	public void getInfo(){
+		
+		try{
+			System.out.println("EL ID DE LA CASA"+this.idCasa);
+			Casa c= ipc.getCasa(idCasa);
+			
+			if (c!=null){
+				this.titulo=c.getTitulo();
+				this.direccion = c.getDireccion();
+			    this.barrio = c.getBarrio();
+			    this.tipoProp = c.getTipoProp();
+			    this.cantBanios = c.getCantBanios();
+			    this.cantCuartos = c.getCantCuartos();
+			    this.garage = c.isGarage();
+			    this.piscina = c.isPiscina();
+			}else
+			{
+				System.out.println("LA CASA ES NULL");
+			}
+		}
+		catch(Exception e){
+		e.printStackTrace();
+		}
 		
 	}
 

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -53,12 +55,18 @@ public class Casa implements Serializable{
 	@Column(name = "piscina", nullable = false)
 	private boolean piscina;
 	
+	@Column(name = "estado", nullable = false)
+	private String estado;
+	
+    @ManyToOne  
+    @JoinColumn(name = "user_id") 
+	private Usuario encargado;
 	
 	public Casa(){
 		
 	}
 	
-	public Casa(int idGeom,int idCasa,String titulo, int direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage){
+	public Casa(int idGeom,int idCasa,String titulo, int direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage,String estado){
 			
 			this.idGeom=idGeom;
 			this.idCasa = idCasa;
@@ -70,9 +78,10 @@ public class Casa implements Serializable{
 			this.cantCuartos = cantCuartos;
 			this.garage = garage;
 			this.piscina = piscina;
+			this.estado=estado;
 				
 	}
-	public Casa(int idGeom,String titulo, int direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage){
+	public Casa(int idGeom,String titulo, int direccion,String barrio,String tipoProp, int cantbanios, int cantCuartos,boolean piscina, boolean garage,String estado){
 		
 		this.idGeom=idGeom;
 		this.titulo=titulo;
@@ -83,6 +92,7 @@ public class Casa implements Serializable{
 		this.cantCuartos = cantCuartos;
 		this.garage = garage;
 		this.piscina = piscina;
+		this.estado=estado;
 			
 }
 	
@@ -98,6 +108,7 @@ public class Casa implements Serializable{
 		    this.cantCuartos = p.getCantCuartos();
 		    this.garage = p.isGarage();
 		    this.piscina = p.isPiscina();
+		    this.estado= p.getEstado();
 		
 	}
 
@@ -180,6 +191,23 @@ public class Casa implements Serializable{
 	public void setPiscina(boolean piscina) {
 		this.piscina = piscina;
 	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public Usuario getEncargado() {
+		return encargado;
+	}
+
+	public void setEncargado(Usuario encargado) {
+		this.encargado = encargado;
+	}
+	
 	
 	
 			
