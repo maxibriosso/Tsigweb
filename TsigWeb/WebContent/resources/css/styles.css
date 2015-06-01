@@ -15,7 +15,7 @@
 	}
 
 .contenedor{
-	min-height: 1500px;
+	/*min-height: 1500px;*/
 
 	margin-left: 10%;
 	margin-right: 10%;
@@ -61,3 +61,9 @@
 	color: white !Important;
 }
 .navbar-brand {padding: 1px !Important;}
+.mapWrap{	display: block;
+ 	 		margin-left: auto;
+ 			margin-right: auto;
+ 	 width: 80%;
+ 	 height: 80%;
+ 	 }
