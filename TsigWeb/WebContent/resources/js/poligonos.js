@@ -13,12 +13,13 @@ var mapoptions = {
 
 };
 
-var map, drawControls;
+var map, drawControls,drawPolygon;
 
 var saveStrategy = new OpenLayers.Strategy.Save();
 saveStrategy.events.on({
     'success': function(event) {
          alert('Changes saved');
+         document.getElementById("botonGuardar").style.display = "none";
     },
     'fail': function(event) {
          alert('Error! Changes not saved');
@@ -30,7 +31,7 @@ saveStrategy.events.on({
 
 function init() {
 	
-
+	document.getElementById("botonGuardar").style.display = "none";
 		
     map = new OpenLayers.Map('map', mapoptions);
 	// setup tiled layer
@@ -61,57 +62,40 @@ function init() {
 
 	});
 
-	    
-
-    //var polygonLayer = new OpenLayers.Layer.Vector("Polygon Layer");
-    var boxLayer = new OpenLayers.Layer.Vector("Box layer");
-	
-    map.addLayers([ tiled, polygonLayer, boxLayer ]);    
+		
+    map.addLayers([ tiled, polygonLayer]);    
     map.addControl(new OpenLayers.Control.LayerSwitcher());    
     map.zoomTo(7);
-    
-
-	drawControls = {
-		polygon : new OpenLayers.Control.DrawFeature(polygonLayer,
-				OpenLayers.Handler.Polygon),
-		box : new OpenLayers.Control.DrawFeature(boxLayer,
-				OpenLayers.Handler.RegularPolygon, {
-					handlerOptions : {
-						sides : 4,
-						irregular : true
-					}
-				})
-	}	
-	for(var key in drawControls) {
-        map.addControl(drawControls[key]);	//Agrega todos los draw q estan en el arreglo drawControls 
-    }
 	
-	drawControls[0].featureAdded = function(feature) {	//drawControls[0] = polygon
+	
+	drawPolygon = new OpenLayers.Control.DrawFeature(polygonLayer, OpenLayers.Handler.Polygon,{displayClass: 'olControlDrawFeaturePolygon'})
+	map.addControl(drawPolygon);
+
+	var panel = new OpenLayers.Control.Panel({
+		displayClass : 'olControlEditingToolbar'
+	});
+	
+	panel.addControls([ new OpenLayers.Control.Navigation(), drawPolygon ]);	
+	map.addControl(panel);
+	
+	drawPolygon.featureAdded = function(feature) {	//drawControls[0] = polygon
 		
-		feature.attributes.nombre="ZonaPolygon";
-        feature.style.strokeColor = "#0000ff";
+		feature.attributes.nombre="ZonaPolygon";        
         feature.state = OpenLayers.State.INSERT;
         feature.layer.drawFeature(feature);
-			
+                
+        drawPolygon.deactivate();
+		OpenLayers.Util.removeItem(panel.controls, drawPolygon);
+		panel.redraw();
+		
+		document.getElementById("botonGuardar").style.display = "block";
 		
    }
 	
 }
 
 function save() {
-
-	alert("entre");
+	
 	saveStrategy.save();
 
-}
-
-function toggleControl(element) {
-    for(key in drawControls) {
-        var control = drawControls[key];
-        if(element.value == key && element.checked) {
-            control.activate();
-        } else {
-            control.deactivate();
-        }
-    }
 }
