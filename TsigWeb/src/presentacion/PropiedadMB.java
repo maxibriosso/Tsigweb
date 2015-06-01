@@ -11,6 +11,7 @@ import java.io.Serializable;
 
 
 
+
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
@@ -22,6 +23,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 import controladores.IPropiedadController;
+import dominio.Casa;
 
 
 
@@ -66,6 +68,31 @@ public class PropiedadMB implements Serializable {
 		}
 
 		return null;
+		
+	}
+	public void getInfo(){
+		
+		try{
+			System.out.println("EL ID DE LA CASA"+this.idCasa);
+			Casa c= ipc.getCasa(idCasa);
+			
+			if (c!=null){
+				this.titulo=c.getTitulo();
+				this.direccion = c.getDireccion();
+			    this.barrio = c.getBarrio();
+			    this.tipoProp = c.getTipoProp();
+			    this.cantBanios = c.getCantBanios();
+			    this.cantCuartos = c.getCantCuartos();
+			    this.garage = c.isGarage();
+			    this.piscina = c.isPiscina();
+			}else
+			{
+				System.out.println("LA CASA ES NULL");
+			}
+		}
+		catch(Exception e){
+		e.printStackTrace();
+		}
 		
 	}
 

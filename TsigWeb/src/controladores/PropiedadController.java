@@ -39,4 +39,18 @@ public class PropiedadController implements IPropiedadController{
 		
 	}
 
+
+	@Override
+	public Casa getCasa(Integer id) {
+		try{
+			return PropiedadDAO.getCasa(id);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			
+		}
+		return null;
+		
+	}
+
 }

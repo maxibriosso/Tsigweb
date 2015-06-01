@@ -7,5 +7,6 @@
 		<properties>
 			<property name="hibernate.id.new_generator_mappings" value="false"/>
 			
+			
 		</properties>	</persistence-unit>
 </persistence>
